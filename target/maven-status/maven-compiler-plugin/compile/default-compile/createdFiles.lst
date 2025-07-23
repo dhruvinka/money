@@ -13,15 +13,16 @@ com\example\expenssManeger\dto\ProfileDTO$ProfileDTOBuilder.class
 com\example\expenssManeger\entity\ExpenseEntity$ExpenseEntityBuilder.class
 com\example\expenssManeger\Controller\DeashbordController.class
 com\example\expenssManeger\dto\FilterDTO.class
+com\example\expenssManeger\Controller\EmailController.class
 com\example\expenssManeger\Repository\ExpenseRepo.class
 com\example\expenssManeger\service\DeashboardService.class
+com\example\expenssManeger\dto\EmailRequest.class
 com\example\expenssManeger\service\EmailService.class
 com\example\expenssManeger\service\IncomeService.class
 com\example\expenssManeger\dto\CategoryDTO$CategoryDTOBuilder.class
 com\example\expenssManeger\dto\FilterDTO$FilterDTOBuilder.class
 com\example\expenssManeger\dto\IncomeDTO$IncomeDTOBuilder.class
 com\example\expenssManeger\ExpenssManegerApplication.class
-com\example\expenssManeger\Controller\HomeController.class
 com\example\expenssManeger\service\ProfileService.class
 com\example\expenssManeger\dto\RecentTransationDTO.class
 com\example\expenssManeger\entity\ProfileEntity.class

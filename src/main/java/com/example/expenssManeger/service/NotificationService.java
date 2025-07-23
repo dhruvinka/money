@@ -38,7 +38,7 @@ public class NotificationService {
 
     for(ProfileEntity profile1 : profile)
     {
-        String body = "Hello " + profile1.getFullname() + ",\n\n" +
+        String body = "Hello " + profile1.getFullName() + ",\n\n" +
                 "Here is your daily income and expense report for " + LocalDate.now() + ":\n\n";
         emailService.sendEmail(profile1.getEmail(), "Daily Reminder",body);
     }
@@ -124,7 +124,7 @@ public void sendDailyExpenseSummary() {
                     .append("<p style='margin-top: 20px;'>Regards,<br>Your Money Manager App</p>")
                     .append("</div>");
 
-            String body = "Hello " + profile.getFullname() + ",<br><br>" +
+            String body = "Hello " + profile.getFullName() + ",<br><br>" +
                     "Here is your expense summary for " + LocalDate.now(ZoneId.of("Asia/Kolkata")) + ":<br><br>" +
                     table.toString();
 

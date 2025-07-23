@@ -47,7 +47,7 @@
         private ProfileDTO toDTO(ProfileEntity profile) {
             return ProfileDTO.builder()
                     .id(profile.getId())
-                    .fullname(profile.getFullname())
+                    .fullName(profile.getFullName())
                     .email(profile.getEmail())
                     .profileImageUrl(profile.getProfileImageUrl())
                     .createdAt(profile.getCreatedAt())
@@ -58,7 +58,7 @@
         public ProfileEntity toEntity(ProfileDTO profileDTO) {
             return ProfileEntity.builder()
                     .id(profileDTO.getId())
-                    .fullname(profileDTO.getFullname())
+                    .fullName(profileDTO.getFullName())
                     .email(profileDTO.getEmail())
                     .profileImageUrl(profileDTO.getProfileImageUrl())
                     .createdAt(profileDTO.getCreatedAt())

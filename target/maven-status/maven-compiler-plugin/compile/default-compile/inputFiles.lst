@@ -1,13 +1,14 @@
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\config\SecurityConfig.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\Controller\CategoryController.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\Controller\DeashbordController.java
+C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\Controller\EmailController.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\Controller\ExpenseController.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\Controller\FilterController.java
-C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\Controller\HomeController.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\Controller\IncomeController.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\Controller\ProfileController.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\dto\AuthDto.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\dto\CategoryDTO.java
+C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\dto\EmailRequest.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\dto\ExpenseDto.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\dto\FilterDTO.java
 C:\Users\Dhruvin\Downloads\expenssManeger\expenssManeger\src\main\java\com\example\expenssManeger\dto\IncomeDTO.java

@@ -1,9 +1,13 @@
 package com.example.expenssManeger.service;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,6 +37,18 @@ public class EmailService {
         }
 
 
+    }
+
+
+    public void sendEmailWithAttachment(String to, String subject, String message, byte[] pdfBytes, String filename) throws MessagingException {
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+        helper.setFrom(fromemail);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(message);
+        helper.addAttachment(filename, new ByteArrayResource(pdfBytes));
+        mailSender.send(mimeMessage);
     }
 
 

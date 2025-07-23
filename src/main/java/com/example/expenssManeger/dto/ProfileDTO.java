@@ -18,10 +18,10 @@ public class ProfileDTO
 
 
     private  Long id;
-    private String  fullname;
+    private  String  fullName;
     private  String  email;
     private  String password;
-    private BigDecimal profileImageUrl;
+    private  String profileImageUrl;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 

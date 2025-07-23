@@ -24,9 +24,9 @@ public class ProfileEntity
     private  Long id;
     private  String  email;
     private  String password;
-    private BigDecimal profileImageUrl;
+    private String profileImageUrl;
     private String activationToken;
-    private String  fullname;
+    private String  fullName;
     private Boolean isActive;
 
     @CreationTimestamp
