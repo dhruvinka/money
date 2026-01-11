@@ -23,7 +23,7 @@
     {
 
 
-        @Value("${activation.url}")
+        @Value("${app.activation.url}")
         private String activationUrl;
         private  final ProfileRepo profileRepo;
         private final EmailService emailService;

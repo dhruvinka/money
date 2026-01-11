@@ -29,7 +29,5 @@ public class AppuserDetail implements UserDetailsService
                 .password(existing.getPassword())
                 .authorities(Collections.emptyList())
                 .build();
-
-
     }
 }

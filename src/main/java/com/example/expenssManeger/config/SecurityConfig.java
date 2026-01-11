@@ -1,5 +1,4 @@
 package com.example.expenssManeger.config;
-
 import com.example.expenssManeger.Filter.JwtRequestFilter;
 import com.example.expenssManeger.service.AppuserDetail;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +47,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
+                "http://localhost:5174",
                 "http://localhost:5173",
                 "https://peppy-cobbler-173b01.netlify.app" // ✅ Add Netlify URL
         ));
