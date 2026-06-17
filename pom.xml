@@ -103,7 +103,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>expenss</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
