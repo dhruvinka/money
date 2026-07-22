@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        form {
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 6px;
+            margin-top: 4px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f2f2f2;
+        }
+
+        .action-btn {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Add / Update Employee</h2>
+    <form id="empForm">
+        <input type="hidden" id="empId">
+
+        <label>Name:</label>
+        <input type="text" id="empName" required>
+
+        <label>Email:</label>
+        <input type="email" id="empEmail" required>
+
+        <label>Phone:</label>
+        <input type="text" id="empPhone" required>
+
+        <label>Alternate Phone:</label>
+        <input type="text" id="empPhone2" required>
+
+        <label>Gender:</label>
+        <select id="gender" required>
+            <option value="">-- Select --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Date of Joining:</label>
+        <input type="date" id="dateOfJoining" required>
+
+        <label>Address:</label>
+        <input type="text" id="empAddress" required>
+
+        <label>Department:</label>
+        <select id="department" required></select>
+
+        <button type="submit">Save Employee</button>
+        <button type="button" id="cancelBtn" style="display:none;">Cancel Edit</button>
+    </form>
+
+    <h2>Employee List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Joining Date</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="empTableBody"></tbody>
+    </table>
+
+    <script>
+        const API_BASE = "http://localhost:8080/api/emp";
+
+        const form = document.getElementById("empForm");
+        const empIdField = document.getElementById("empId");
+        const departmentSelect = document.getElementById("department");
+        const cancelBtn = document.getElementById("cancelBtn");
+
+        // Load departments into dropdown
+        async function loadDepartments() {
+            const res = await fetch(`${API_BASE}/departments`);
+            const departments = await res.json();
+
+            departmentSelect.innerHTML = '<option value="">-- Select --</option>';
+            departments.forEach(dep => {
+                const opt = document.createElement("option");
+                opt.value = dep.departmentId;
+                opt.textContent = dep.departmentName;
+                departmentSelect.appendChild(opt);
+            });
+
+        }
+
+        // Load all employees into table
+        async function loadEmployees() {
+            const res = await fetch(`${API_BASE}/user`);
+            const employees = await res.json();
+            const tbody = document.getElementById("empTableBody");
+            tbody.innerHTML = "";
+
+            employees.forEach(emp => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+      <td>${emp.empId}</td>
+      <td>${emp.empName}</td>
+      <td>${emp.empEmail}</td>
+      <td>${emp.empPhone}</td>
+      <td>${emp.gender}</td>
+      <td>${emp.dateOfJoining}</td>
+      <td>${emp.department ? emp.department.departmentName : ""}</td>
+      <td>
+        <button class="action-btn" onclick="editEmployee(${emp.empId})">Edit</button>
+        <button class="action-btn" onclick="deleteEmployee(${emp.empId})">Delete</button>
+      </td>
+    `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Add or Update employee
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const empData = {
+                empName: document.getElementById("empName").value,
+                empEmail: document.getElementById("empEmail").value,
+                empPhone: document.getElementById("empPhone").value,
+                empPhone2: document.getElementById("empPhone2").value,
+                gender: document.getElementById("gender").value,
+                dateOfJoining: document.getElementById("dateOfJoining").value,
+                empAddress: document.getElementById("empAddress").value,
+                department: {
+                     departmentId: parseInt(departmentSelect.value) 
+                    }
+            };
+
+            const id = empIdField.value;
+
+            if (id) {
+                // Update
+                await fetch(`${API_BASE}/user/${id}`, {
+                    method: "PUT",
+                    headers: { 
+                        "Content-Type": "application/json"
+                     },
+                    body: JSON.stringify(empData)
+                });
+            } else {
+                // Create
+                await fetch(`${API_BASE}/user`, {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json"
+                     },
+                    body: JSON.stringify(empData)
+                });
+            }
+
+            resetForm();
+            loadEmployees();
+        });
+
+        // Edit employee - populate form
+        async function editEmployee(id) {
+            const res = await fetch(`${API_BASE}/user/${id}`);
+            const emp = await res.json();
+
+            empIdField.value = emp.empId;
+            document.getElementById("empName").value = emp.empName;
+            document.getElementById("empEmail").value = emp.empEmail;
+            document.getElementById("empPhone").value = emp.empPhone;
+            document.getElementById("empPhone2").value = emp.empPhone2;
+            document.getElementById("gender").value = emp.gender;
+            document.getElementById("dateOfJoining").value = emp.dateOfJoining;
+            document.getElementById("empAddress").value = emp.empAddress;
+            departmentSelect.value = emp.department ? emp.department.departmentId : "";
+
+            cancelBtn.style.display = "inline-block";
+            window.scrollTo(0, 0);
+        }
+
+        // Delete employee
+        async function deleteEmployee(id) {
+            if (!confirm("Delete this employee?")) return;
+            await fetch(`${API_BASE}/user/${id}`, { method: "DELETE" });
+            loadEmployees();
+        }
+
+        // Cancel edit
+        cancelBtn.addEventListener("click", resetForm);
+
+        function resetForm() {
+            form.reset();
+            empIdField.value = "";
+            cancelBtn.style.display = "none";
+        }
+
+        // Initial load
+        loadDepartments();
+        loadEmployees();
+    </script>
+
+</body>
+
+</html>
